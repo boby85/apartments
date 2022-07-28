@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('category_id')->index();
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->unsignedBigInteger('category_id')->index();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name');
             $table->float('price', 10);
             $table->enum('currency', ['EUR', 'USD', 'BAM'])->default('EUR');
