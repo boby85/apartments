@@ -10,7 +10,7 @@ class Apartment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name", "price", "currency", "description", "properties", "rating"];
+    protected $fillable = ["name", "price", "currency", "description", "properties", "category_id", "rating"];
 
     public function category(): BelongsTo {
         return $this->belongsTo(Category::class);
