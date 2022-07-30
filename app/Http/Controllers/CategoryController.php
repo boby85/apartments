@@ -3,83 +3,66 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(Category::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store():JsonResponse
     {
-        //
-    }
+        $attributes = $this->validateCategory();
+        $category = Category::create($attributes);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
+        return response()->json($category);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function update(Request $request, Category $category)
+    public function update($id): JsonResponse
     {
-        //
+        $category = Category::findOrFail($id);
+        $attributes = $this->validateCategory();
+        $category->update($attributes);
+
+        return response()->json('Category updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function destroy(Category $category)
+    public function destroy($id): JsonResponse
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return response()->json('Category deleted successfully');
+
+    }
+
+    protected function validateCategory(): array {
+        return request()->validate([
+            'name' => ['required','string']
+        ]);
     }
 }
