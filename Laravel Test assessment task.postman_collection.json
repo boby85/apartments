@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "f89b1432-a634-4f2b-83b6-48abd13eb68c",
+		"name": "Laravel Test assessment task",
+		"description": "API basic documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3901287"
+	},
+	"item": [
+		{
+			"name": "get categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"categories"
+					]
+				},
+				"description": "Get request for fetching all categories available. No parameters required."
+			},
+			"response": []
+		},
+		{
+			"name": "store category",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "category_name",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"category"
+					]
+				},
+				"description": "Stores new category into database. Required parameter is the name of the category.\n\nname => value"
+			},
+			"response": []
+		},
+		{
+			"name": "update category",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "category_new_name",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/category/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"category",
+						"{id}"
+					]
+				},
+				"description": "Updates category in database. Required parameter is the name of the category which is being updated.\n\nURL must contain id of the given category."
+			},
+			"response": []
+		},
+		{
+			"name": "delete category",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/category/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"category",
+						"{id}"
+					]
+				},
+				"description": "Remove category from database. Required parameter is the id of the category which is being removed.\n\nURL must contain id of the given category."
+			},
+			"response": []
+		},
+		{
+			"name": "get apartments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost/api/apartments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"apartments"
+					]
+				},
+				"description": "Get request for fetching apartments. By default, only name, price & currency are returned for 10 results. No parameters required."
+			},
+			"response": []
+		},
+		{
+			"name": "store apartment",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "apartment_name",
+							"type": "default"
+						},
+						{
+							"key": "price",
+							"value": "price_value",
+							"type": "default"
+						},
+						{
+							"key": "currency",
+							"value": "currency_name",
+							"type": "default"
+						},
+						{
+							"key": "description",
+							"value": "description (optional)",
+							"type": "default"
+						},
+						{
+							"key": "properties",
+							"value": "properites_json (optional)",
+							"type": "default"
+						},
+						{
+							"key": "category_id",
+							"value": "category_id",
+							"type": "default"
+						},
+						{
+							"key": "rating",
+							"value": "rating (0-5)",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/apartment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"apartment"
+					]
+				},
+				"description": "Stores new apartment into database."
+			},
+			"response": []
+		},
+		{
+			"name": "update apartment",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "apartment_name",
+							"type": "default"
+						},
+						{
+							"key": "price",
+							"value": "price_value",
+							"type": "default"
+						},
+						{
+							"key": "currency",
+							"value": "currency_name",
+							"type": "default"
+						},
+						{
+							"key": "description",
+							"value": "description (optional)",
+							"type": "default"
+						},
+						{
+							"key": "properties",
+							"value": "properites_json (optional)",
+							"type": "default"
+						},
+						{
+							"key": "category_id",
+							"value": "category_id",
+							"type": "default"
+						},
+						{
+							"key": "rating",
+							"value": "rating (0-5)",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/apartment/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"apartment",
+						"{id}"
+					]
+				},
+				"description": "Updates apartment in database.\n\nURL must contain id of the given apartment which is being updated."
+			},
+			"response": []
+		},
+		{
+			"name": "delete apartment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/apartment/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"apartment",
+						"{id}"
+					]
+				},
+				"description": "Remove apartment from database. Required parameter is the id of the apartment which is being removed.\n\nURL must contain id of the given apartment."
+			},
+			"response": []
+		}
+	]
+}

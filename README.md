@@ -8,11 +8,12 @@
 
 - Clone repository
 - Run the migrations
+- Seed the DB (see dummy data section)
 - Execute desired request
 
 ### Examples:
 
-####GET
+#### GET
 Get request for fetching all categories available. No parameters required.
 
     "name": "get categories",
@@ -20,7 +21,8 @@ Get request for fetching all categories available. No parameters required.
         "method": "GET",
         "header": [],
         "url": "/api/categories"
-####DELETE
+        
+#### DELETE
 Remove category from database. Required parameter is the id of the category which is being removed. URL must contain id of the given category.
 
     "name": "delete category",
@@ -29,7 +31,7 @@ Remove category from database. Required parameter is the id of the category whic
         "header": [],
         "url": "/api/category/{id}"
 
-####POST
+#### POST
 Stores new apartment into database.
 
     "name": "store apartment",
@@ -71,6 +73,8 @@ Stores new apartment into database.
             "url": "/api/apartment"
         }
     }
+    
+Note: For full postman json export with all examples check the file: Laravel Test assessment task.postman_collection.json
 
 ### Dummy data:
 
