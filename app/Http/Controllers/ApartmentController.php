@@ -17,7 +17,8 @@ class ApartmentController extends Controller
     {
         $apartments = DB::table('apartments')
             ->select('id','name', 'price', 'currency')
-            ->get();
+            ->paginate(10)
+            ->items();
 
         return response()->json($apartments);
     }
