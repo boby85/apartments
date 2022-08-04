@@ -19,7 +19,7 @@ class ApartmentFactory extends Factory
         return [
             'category_id' => fake()->numberBetween(1, 20),
             'name' => fake()->words(3, true),
-            'price' => fake()->unique()->randomFloat(min: 350, max: 1550),
+            'price' => fake()->randomFloat(min: 350, max: 1550),
             'currency' => fake()->randomElement(['EUR', 'USD', 'BAM'])
         ];
     }
