@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->index();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name');
+            $table->string('slug')->unique()->nullable();
             $table->float('price', 10);
             $table->enum('currency', ['EUR', 'USD', 'BAM'])->default('EUR');
             $table->text('description')->nullable();

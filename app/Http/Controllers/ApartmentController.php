@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apartment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -30,8 +31,8 @@ class ApartmentController extends Controller
      */
     public function store(): JsonResponse
     {
-
         $attributes = $this->validateApartment();
+        $attributes['slug'] = Str::slug ((request('name') . " " . microtime(true)), '-');
         $apartment = Apartment::create($attributes);
 
         return response()->json($apartment);
