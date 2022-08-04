@@ -32,7 +32,7 @@ class ApartmentController extends Controller
     public function store(): JsonResponse
     {
         $attributes = $this->validateApartment();
-        $attributes['slug'] = Str::slug ((request('name') . " " . microtime(true)), '-');
+        $attributes['slug'] = Str::slug ((request('name') . " " . microtime(true)));
         $apartment = Apartment::create($attributes);
 
         return response()->json($apartment);
@@ -65,6 +65,25 @@ class ApartmentController extends Controller
         $apartment->delete();
 
         return response()->json("Apartment deleted successfully");
+    }
+
+    public function search(): JsonResponse
+    {
+        $search_keys = array("name", "price", "description", "category_id");
+
+        if(request()->hasAny($search_keys)) {
+            $apartments = DB::table('apartments')->select('id', 'name', 'price', 'currency');
+            match (true) {
+                request()->has('name') => $apartments->where('name','LIKE',  '%' . request('name') .'%'),
+                request()->has('price') => $apartments->where('price', '=', request('price')),
+                request()->has('description') => $apartments->where('description', 'LIKE', '%' . request('description') .'%'),
+                request()->has('category_id') => $apartments->where('category_id', '=', request('category_id'))
+            };
+            $apartments = $apartments->paginate(10)->items();
+        } else {
+            $apartments = 'Your search has no results';
+        }
+        return response()->json($apartments);
     }
 
     protected function validateApartment(): array {

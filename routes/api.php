@@ -19,6 +19,7 @@ Route::get('/apartments', [ApartmentController::class, 'index']);
 Route::put('/apartment', [ApartmentController::class, 'store']);
 Route::patch('/apartment/{id}', [ApartmentController::class, 'update']);
 Route::delete('/apartment/{id}', [ApartmentController::class, 'destroy']);
+Route::get('/apartments/search', [ApartmentController::class, 'search']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::put('/category', [CategoryController::class, 'store']);
