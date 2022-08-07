@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apartment;
+use App\Models\ApartmentRating;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class ApartmentController extends Controller
 {
@@ -84,6 +87,48 @@ class ApartmentController extends Controller
             $apartments = 'Your search has no results';
         }
         return response()->json($apartments);
+    }
+
+    public function rateApartment($id): JsonResponse
+    {
+        $apartment = Apartment::findOrFail($id);
+
+        $plainTextToken = explode("|", request()->bearerToken());
+        $hashedToken = hash('sha256', $plainTextToken[1]);
+        $token = PersonalAccessToken::where('token', $hashedToken)->first();
+        $user = User::findOrFail($token->tokenable_id);
+
+        $apartment_rating = ApartmentRating::where([
+            ['apartment_id', '=', $id],
+            ['user_id', '=', $user->id]
+        ])->count();
+
+        if($apartment_rating) {
+            return response()->json('You can rate apartment only once');
+        }
+
+        if (request('rate') < 1 || request('rate') > 5) {
+            return response()->json('Rate must be between 1 - 5!');
+        }
+
+        if ($apartment->rating == 0) {
+            $avg_rate = (float) request('rate');
+        } else {
+            $avg_rate = (float) (($apartment->rating + request('rate')) / 2);
+        }
+
+        ApartmentRating::create(
+            [
+                'apartment_id' => $id,
+                'user_id' => $user->id,
+                'rating' => request('rate')
+            ]
+        );
+
+        $apartment->rating = $avg_rate;
+        $apartment->save();
+
+        return response()->json('Apartment rated successfully. Average rate: ' . $avg_rate);
     }
 
     protected function validateApartment(): array {

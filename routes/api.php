@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -25,6 +26,12 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::put('/category', [CategoryController::class, 'store']);
 Route::patch('/category/{id}', [CategoryController::class, 'update']);
 Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+
+Route::post('/create_user', [AuthController::class, 'createUser']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/apartment/{id}/rate_apartment', [ApartmentController::class, 'rateApartment']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
