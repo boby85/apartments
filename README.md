@@ -31,7 +31,7 @@ Remove category from database. Required parameter is the id of the category whic
         "header": [],
         "url": "/api/category/{id}"
 
-#### POST
+#### PUT
 Stores new apartment into database.
 
     "name": "store apartment",

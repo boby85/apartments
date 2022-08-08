@@ -277,6 +277,124 @@
 				"description": "Remove apartment from database. Required parameter is the id of the apartment which is being removed.\n\nURL must contain id of the given apartment."
 			},
 			"response": []
+		},
+				{
+			"name": "search apartments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost/api/apartments/search?category_id=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"apartments",
+						"search"
+					],
+					"query": [
+						{
+							"key": "category_id",
+							"value": "20"
+						},
+						{
+							"key": "name",
+							"value": "cool name",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "John Doe",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "john.doe5@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/create_user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"create_user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rate apartment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|eojQb127s2J1hAMOVdMyu2iN6KvYkYQfoJdSXJpa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "rate",
+							"value": "4.25",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/apartment/3/rate_apartment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"apartment",
+						"3",
+						"rate_apartment"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
