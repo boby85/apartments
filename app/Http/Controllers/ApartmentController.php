@@ -36,6 +36,8 @@ class ApartmentController extends Controller
     {
         $attributes = $this->validateApartment();
         $attributes['slug'] = Str::slug ((request('name') . " " . microtime(true)));
+        $attributes['description'] = request('description');
+        $attributes['properties'] = json_encode(request('properties'));
         $apartment = Apartment::create($attributes);
 
         return response()->json($apartment);
