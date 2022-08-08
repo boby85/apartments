@@ -53,6 +53,8 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::findOrFail($id);
         $attributes = $this->validateApartment();
+        $attributes['description'] = request('description');
+        $attributes['properties'] = json_encode(request('properties'));
         $apartment->update($attributes);
 
         return response()->json('Apartment updated successfully');
